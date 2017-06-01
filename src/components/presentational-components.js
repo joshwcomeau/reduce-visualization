@@ -15,6 +15,11 @@ export const Row = styled.div`
   justify-content: space-between;
 `;
 
+export const Col = styled.div`
+  position: relative;
+  flex: 1;
+`
+
 export const LandingPadTestDiv = styled.div`
   position: absolute;
   left: 100px;
