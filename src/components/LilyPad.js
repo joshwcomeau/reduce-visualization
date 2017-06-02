@@ -1,6 +1,8 @@
-import React, { PureComponent } from 'react';
+import React, { Children, PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+
+import { addLilyPad } from '../actions';
 
 import Frog from './Frog';
 
@@ -8,34 +10,39 @@ import Frog from './Frog';
 class LilyPad extends PureComponent {
   static propTypes = {
     id: PropTypes.string.isRequired,
-    frogs: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      elem: PropTypes.object.isRequired, // TODO: More specific!
-    })).isRequired,
+    tag: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.func,
+    ]).isRequired,
+    addLilyPad: PropTypes.func.isRequired,
+    children: PropTypes.node,
+  }
+
+  static defaultProps = {
+    tag: 'div',
+  }
+
+  componentDidMount() {
+    const { id } = this.props;
+
+    // On mount, let Redux know that this pad exists.
+    this.props.addLilyPad({ id, elem: this.elem });
   }
 
   render() {
-    const { id, frogs } = this.props;
+    const { id, tag, children } = this.props;
 
-    // A bunch of stuff could be happening in this update loop.
-    // - A new frog could be landing
-    // - A new frog could be jumping to another lilly pad
-    // - A new frog could be leaving the DOM
-
-    return (
-      <div id={id}>
-        {frogs.map(frog => (
-          <Frog id={frog} padId={id} />
-        ))}
-      </div>
-    )
+    return React.createElement(
+      tag,
+      {
+        id,
+        ref: elem => this.elem = elem,
+      },
+      children
+    );
   }
 }
 
-const mapStateToProps = (state, ownProps) => ({
-  frogs: Object.keys(state.frogs).map(frogId => (
-    state.frogs[frogId].lilyPadId === ownProps.id
-  )),
-});
+const mapDispatchToProps = { addLilyPad };
 
-export default connect(mapStateToProps)(LilyPad);
+export default connect(null, mapDispatchToProps)(LilyPad);

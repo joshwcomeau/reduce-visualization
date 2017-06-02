@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { beginAnimation } from '../actions';
 
 import LilyPad from './LilyPad';
+import Frog from './Frog';
 import {
   Button,
   Card,
@@ -14,14 +15,13 @@ import {
   ForegroundItemSet,
   ReduceStatement,
   Row,
+  Span,
 } from './presentational-components';
 
 
 class Demo extends Component {
   render() {
     const { tick, beginAnimation, initialValue, values } = this.props;
-
-    console.log({ values })
 
     return (
       <div>
@@ -36,17 +36,29 @@ class Demo extends Component {
                 {initialValue}
               </BackgroundItemSet>
               <ForegroundItemSet>
-                <LilyPad id="initial-value" />
+                <LilyPad id="initial-value-pad">
+                  <Frog id="initial-value-frog" padId="initial-value-pad">
+                    {initialValue}
+                  </Frog>
+                </LilyPad>
               </ForegroundItemSet>
             </Col>
 
             <Col>
               <BackgroundItemSet>
-                {values.join(', ')}
+                {values.join(',')}
               </BackgroundItemSet>
               <ForegroundItemSet>
                 {values.map((value, index) => (
-                  <LilyPad id={`value-${index}`} />
+                  <LilyPad tag={Span} id={`value-${index}-pad`}>
+                    <Frog
+                      id={`value-${index}-frog`}
+                      padId={`value-${index}-pad`}
+                    >
+                      {value}
+                      {(index < values.length - 1) && ','}
+                    </Frog>
+                  </LilyPad>
                 ))}
               </ForegroundItemSet>
             </Col>

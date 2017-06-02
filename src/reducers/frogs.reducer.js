@@ -1,3 +1,5 @@
+import { createSelector } from 'reselect'
+
 const initialState = {};
 
 
@@ -8,7 +10,7 @@ export default function frogsReducer(state = initialState, action) {
         ...state,
         [action.id]: {
           elem: action.elem,
-          LilyPadId: null,
+          padId: action.padId,
         },
       };
 
@@ -17,10 +19,19 @@ export default function frogsReducer(state = initialState, action) {
         ...state,
         [action.id]: {
           ...state[action.id],
-          LilyPadId: action.LilyPadId,
+          padId: action.padId,
         },
       };
 
     default: return state;
   }
 }
+
+const frogsSelector = state => state.frogs;
+
+export const frogsListSelector = createSelector(frogsSelector, frogs => (
+  Object.keys(frogs).map(id => ({
+    id,
+    ...frogs[id],
+  }))
+));

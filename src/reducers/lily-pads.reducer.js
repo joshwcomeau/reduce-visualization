@@ -3,7 +3,7 @@ const initialState = {};
 
 export default function LilyPadReducer(state = initialState, action) {
   switch (action.type) {
-    case 'ADD_LILLY_PAD':
+    case 'ADD_LILY_PAD':
       return {
         ...state,
         [action.id]: { elem: action.elem },
