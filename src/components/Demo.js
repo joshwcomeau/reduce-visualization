@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import { beginAnimation } from '../actions';
 
-import LillyPad from './LillyPad';
+import LilyPad from './LilyPad';
 import {
   Button,
   Card,
@@ -18,7 +19,9 @@ import {
 
 class Demo extends Component {
   render() {
-    const { beginAnimation, initialValue, values } = this.props;
+    const { tick, beginAnimation, initialValue, values } = this.props;
+
+    console.log({ values })
 
     return (
       <div>
@@ -33,7 +36,7 @@ class Demo extends Component {
                 {initialValue}
               </BackgroundItemSet>
               <ForegroundItemSet>
-                <LillyPad id="initial-value" />
+                <LilyPad id="initial-value" />
               </ForegroundItemSet>
             </Col>
 
@@ -43,7 +46,7 @@ class Demo extends Component {
               </BackgroundItemSet>
               <ForegroundItemSet>
                 {values.map((value, index) => (
-                  <LillyPad id={`value-${index}`} />
+                  <LilyPad id={`value-${index}`} />
                 ))}
               </ForegroundItemSet>
             </Col>
@@ -52,16 +55,16 @@ class Demo extends Component {
           <ReduceStatement>
             const reduce = (
             {
-              <LillyPad
+              <LilyPad
                 id="acc"
-                style={{ display: 'inline-block', width: 40 }}}
+                style={{ display: 'inline-block', width: 40 }}
               />
             }
             {' '}
             {
-              <LillyPad
+              <LilyPad
                 id="item"
-                style={{ display: 'inline-block', width: 54 }}}
+                style={{ display: 'inline-block', width: 54 }}
               />
             }
             )
@@ -73,8 +76,8 @@ class Demo extends Component {
 }
 
 const mapStateToProps = state => ({
-  values: state.reductionData.values,
-  initialValue: state.reductionData.initialValue
+  values: state.reducingData.values,
+  initialValue: state.reducingData.initialValue
 });
 
 const mapDispatchToProps = {

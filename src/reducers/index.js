@@ -1,14 +1,14 @@
 import { combineReducers } from 'redux';
 
-import frog from './frog.reducer';
-import lillyPad from './lilly-pad.reducer';
-import loop from './loop.reducer';
+import frogs from './frogs.reducer';
+import LilyPads from './lily-pads.reducer';
+import animation from './animation.reducer';
 import reducingData from './reducing-data.reducer';
 
 
 export default combineReducers({
-  frog,
-  lillyPad,
-  loop,
+  frogs,
+  LilyPads,
+  animation,
   reducingData,
 });

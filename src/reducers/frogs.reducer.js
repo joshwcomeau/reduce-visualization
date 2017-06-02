@@ -1,14 +1,14 @@
 const initialState = {};
 
 
-export default function frogReducer(state = initialState, action) {
+export default function frogsReducer(state = initialState, action) {
   switch (action.type) {
     case 'ADD_FROG':
       return {
         ...state,
         [action.id]: {
           elem: action.elem,
-          lillyPadId: null,
+          LilyPadId: null,
         },
       };
 
@@ -17,7 +17,7 @@ export default function frogReducer(state = initialState, action) {
         ...state,
         [action.id]: {
           ...state[action.id],
-          lillyPadId: action.lillyPadId,
+          LilyPadId: action.LilyPadId,
         },
       };
 
