@@ -6,12 +6,12 @@ import { beginAnimation } from '../actions';
 
 import LilyPad from './LilyPad';
 import Frog from './Frog';
+import Line from './Line';
 import {
   Button,
   Card,
   Col,
   DataWithHeader,
-  BackgroundItemSet,
   ForegroundItemSet,
   ReduceStatement,
   Row,
@@ -30,69 +30,71 @@ class Demo extends Component {
         </Button>
 
         <Card>
-          <Row>
-            <Col>
-              <BackgroundItemSet>
-                {initialValue}
-              </BackgroundItemSet>
-              <ForegroundItemSet>
-                <LilyPad tag="span" id="initial-value-pad">
-                  <Frog
-                    id="initial-value-frog"
-                    padId="initial-value-pad"
-                  >
-                    {initialValue}
-                  </Frog>
-                </LilyPad>
-              </ForegroundItemSet>
-            </Col>
-
-            <Col>
-              <BackgroundItemSet>
-                {values.join(', ')}
-              </BackgroundItemSet>
-              <ForegroundItemSet>
-                {values.map((value, index) => (
-                  <span key={index}>
-                    <LilyPad
-                      tag="span"
-                      style={{ display: 'inline-block' }}
-                      id={`value-${index}-pad`}
-                    >
-                      <Frog
-                        id={`value-${index}-frog`}
-                        padId={`value-${index}-pad`}
-                      >
-                        {value}
-                      </Frog>
-                    </LilyPad>
-                    {(index < values.length - 1) && ', '}
-                  </span>
-                ))}
-              </ForegroundItemSet>
-            </Col>
-          </Row>
-
           <ReduceStatement>
-            const reduce = (
-            {
+            <Line id="initial-value">
+              {'const initialValue = '}
               <LilyPad
-                id="acc"
-                style={{ display: 'inline-block', width: 40 }}
+                tag="span"
+                id="initial-value-pad"
+                placeholder={initialValue}
               >
-                acc
+                <Frog
+                  id="initial-value-frog"
+                  padId="initial-value-pad"
+                >
+                  {initialValue}
+                </Frog>
               </LilyPad>
-            }
-            {', '}
-            {
-              <LilyPad
-                id="item"
-                style={{ display: 'inline-block', width: 54 }}
-              >
-                item
-              </LilyPad>
-            }
-            )
+              {';'}
+            </Line>
+            <Line id="values">
+              {'const values = ['}
+              {values.map((value, index) => (
+                <span key={index}>
+                  <LilyPad
+                    tag="span"
+                    style={{ display: 'inline-block' }}
+                    id={`value-${index}-pad`}
+                    placeholder={value}
+                  >
+                    <Frog
+                      id={`value-${index}-frog`}
+                      padId={`value-${index}-pad`}
+                    >
+                      {value}
+                    </Frog>
+                  </LilyPad>
+                  {(index < values.length - 1) && ', '}
+                </span>
+              ))}
+              {'];'}
+            </Line>
+            <br />
+            <Line id="reduce-open">
+              {'values.reduce(('}
+              {
+                <LilyPad
+                  id="acc"
+                  style={{ display: 'inline-block', width: 40 }}
+                  placeholder="acc"
+                />
+              }
+              {', '}
+              {
+                <LilyPad
+                  id="item"
+                  style={{ display: 'inline-block', width: 54 }}
+                  placeholder="item"
+                />
+              }
+              {') => {'}
+            </Line>
+            <Line id="reduce-body" indented>
+              {'return acc + item;'}
+            </Line>
+            <Line id="reduce-close">
+              {'}, initialValue);'}
+            </Line>
           </ReduceStatement>
         </Card>
       </div>

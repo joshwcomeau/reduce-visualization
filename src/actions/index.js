@@ -4,6 +4,8 @@ export const ADD_FROG = 'ADD_FROG';
 export const ADD_LILY_PAD = 'ADD_LILY_PAD';
 export const UPDATE_FROG_LOCATION = 'UPDATE_FROG_LOCATION';
 export const JUMP_TO_NEW_PAD = 'JUMP_TO_NEW_PAD';
+export const FOCUS_LINES = 'FOCUS_LINES';
+export const RESET_LINE_FOCUS = 'RESET_LINE_FOCUS';
 
 export const beginAnimation = () => ({
   type: BEGIN_ANIMATION,
@@ -38,4 +40,13 @@ export const jumpToNewPad = ({ frogId, padId }) => ({
   type: JUMP_TO_NEW_PAD,
   frogId,
   padId,
+});
+
+export const focusLines = ({ lineIds }) => ({
+  type: FOCUS_LINES,
+  lineIds,
+});
+
+export const resetLineFocus = () => ({
+  type: RESET_LINE_FOCUS,
 });

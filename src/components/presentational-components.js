@@ -43,21 +43,6 @@ export const Card = styled.div`
   padding: 2rem;
 `;
 
-export const BackgroundItemSet = styled.div`
-  position: absolute;
-  zIndex: 1;
-  font-size: 22px;
-  letter-spacing: 2;
-  font-weight: bold;
-  color: #CCC;
-`;
-
-export const ForegroundItemSet = BackgroundItemSet.extend`
-  position: relative;
-  z-index: 2;
-  color: black;
-`;
-
 export const Button = styled.button`
   padding: 10px 25px;
 `

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import omit from 'lodash/omit';
 
 import { updateFrogLocation } from '../actions';
+import { TRANSLATE_DURATION } from '../constants';
 import { getElementCenter } from '../helpers';
 
 
@@ -40,7 +41,7 @@ class Frog extends PureComponent {
 
     this.elem.style.transform = `translate(${left}px, ${top}px)`;
     window.requestAnimationFrame(() => {
-      this.elem.style.transition = 'transform 500ms'; // TODO: Fetch from redux
+      this.elem.style.transition = `transform ${TRANSLATE_DURATION}ms`;
       window.requestAnimationFrame(() => {
         this.elem.style.transform = 'translate(0px, 0px)';
       });

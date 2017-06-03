@@ -17,6 +17,7 @@ class LilyPad extends PureComponent {
       PropTypes.string,
       PropTypes.func,
     ]).isRequired,
+    placeholder: PropTypes.string,
     frogs: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.string.isRequired,
       padId: PropTypes.string.isRequired,
@@ -67,12 +68,12 @@ class LilyPad extends PureComponent {
   }
 
   render() {
-    const { id, tag, frogs, children } = this.props;
+    const { id, tag, frogs, placeholder } = this.props;
     const delegated = omit(this.props, Object.keys(LilyPad.propTypes));
 
     const renderedChildren = frogs.length > 0
       ? this.renderFrogs()
-      : children;
+      : <span style={{ opacity: 0.5 }}>{placeholder}</span>;
 
     return React.createElement(
       tag,
