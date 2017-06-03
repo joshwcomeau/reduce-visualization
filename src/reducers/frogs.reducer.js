@@ -12,6 +12,7 @@ export default function frogsReducer(state = initialState, action) {
         ...state,
         [action.id]: {
           elem: action.elem,
+          children: action.children,
           padId: action.padId,
         },
       };
@@ -19,8 +20,8 @@ export default function frogsReducer(state = initialState, action) {
     case JUMP_TO_NEW_PAD:
       return {
         ...state,
-        [action.id]: {
-          ...state[action.id],
+        [action.frogId]: {
+          ...state[action.frogId],
           padId: action.padId,
         },
       };

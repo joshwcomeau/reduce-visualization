@@ -18,14 +18,6 @@ class Frog extends PureComponent {
     tag: 'div',
   }
 
-  componentDidMount() {
-    const { id, padId } = this.props;
-    const { elem } = this;
-
-    // On mount, let Redux know that this frog exists.
-    this.props.addFrog({ id, padId, elem });
-  }
-
   render() {
     const { id, tag, children } = this.props;
 

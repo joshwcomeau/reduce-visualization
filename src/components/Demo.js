@@ -21,11 +21,11 @@ import {
 
 class Demo extends Component {
   render() {
-    const { tick, beginAnimation, initialValue, values } = this.props;
+    const { beginAnimation, initialValue, values } = this.props;
 
     return (
       <div>
-        <Button onClick={this.beginAnimation}>
+        <Button onClick={beginAnimation}>
             Start Animation
         </Button>
 
@@ -46,19 +46,21 @@ class Demo extends Component {
 
             <Col>
               <BackgroundItemSet>
-                {values.join(',')}
+                {values.join(', ')}
               </BackgroundItemSet>
               <ForegroundItemSet>
                 {values.map((value, index) => (
-                  <LilyPad tag={Span} id={`value-${index}-pad`}>
-                    <Frog
-                      id={`value-${index}-frog`}
-                      padId={`value-${index}-pad`}
-                    >
-                      {value}
-                      {(index < values.length - 1) && ','}
-                    </Frog>
-                  </LilyPad>
+                  <span key={index}>
+                    <LilyPad tag={Span} id={`value-${index}-pad`}>
+                      <Frog
+                        id={`value-${index}-frog`}
+                        padId={`value-${index}-pad`}
+                      >
+                        {value}
+                      </Frog>
+                    </LilyPad>
+                    {(index < values.length - 1) && ', '}
+                  </span>
                 ))}
               </ForegroundItemSet>
             </Col>
@@ -70,14 +72,18 @@ class Demo extends Component {
               <LilyPad
                 id="acc"
                 style={{ display: 'inline-block', width: 40 }}
-              />
+              >
+                acc
+              </LilyPad>
             }
-            {' '}
+            {', '}
             {
               <LilyPad
                 id="item"
                 style={{ display: 'inline-block', width: 54 }}
-              />
+              >
+                item
+              </LilyPad>
             }
             )
           </ReduceStatement>
