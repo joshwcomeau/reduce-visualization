@@ -2,6 +2,7 @@ export const BEGIN_ANIMATION = 'BEGIN_ANIMATION';
 export const RESET_ANIMATION = 'RESET_ANIMATION';
 export const ADD_FROG = 'ADD_FROG';
 export const ADD_LILY_PAD = 'ADD_LILY_PAD';
+export const UPDATE_FROG_LOCATION = 'UPDATE_FROG_LOCATION';
 export const JUMP_TO_NEW_PAD = 'JUMP_TO_NEW_PAD';
 
 export const beginAnimation = () => ({
@@ -24,6 +25,13 @@ export const addLilyPad = ({ id, elem }) => ({
   type: ADD_LILY_PAD,
   id,
   elem,
+});
+
+export const updateFrogLocation = ({ id, top, left }) => ({
+  type: UPDATE_FROG_LOCATION,
+  id,
+  top,
+  left
 });
 
 export const jumpToNewPad = ({ frogId, padId }) => ({

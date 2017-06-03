@@ -45,8 +45,6 @@ class LilyPad extends PureComponent {
       const { id, children } = frogElem.props;
       const padId = this.props.id;
 
-      console.log('Children', children)
-
       // Ok, so this is pretty gross. We need to find the DOM Node for each
       // frog, but we don't have access to the ref escape hatch.
       // Initially I was going to put this logic in the Frog componentDidMount,
@@ -75,10 +73,6 @@ class LilyPad extends PureComponent {
     const renderedChildren = frogs.length > 0
       ? this.renderFrogs()
       : children;
-
-    if (typeof children === 'string') {
-      console.log('Rendering', frogs, renderedChildren)
-    }
 
     return React.createElement(
       tag,

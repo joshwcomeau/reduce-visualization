@@ -14,17 +14,22 @@ export default function frogsReducer(state = initialState, action) {
           elem: action.elem,
           children: action.children,
           padId: action.padId,
+          lastPadId: null,
         },
       };
 
-    case JUMP_TO_NEW_PAD:
+    case JUMP_TO_NEW_PAD: {
+      const frog = state[action.frogId];
+
       return {
         ...state,
         [action.frogId]: {
-          ...state[action.frogId],
+          ...frog,
           padId: action.padId,
+          lastPadId: frog.padId,
         },
       };
+    }
 
     default: return state;
   }

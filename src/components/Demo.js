@@ -36,8 +36,11 @@ class Demo extends Component {
                 {initialValue}
               </BackgroundItemSet>
               <ForegroundItemSet>
-                <LilyPad id="initial-value-pad">
-                  <Frog id="initial-value-frog" padId="initial-value-pad">
+                <LilyPad tag="span" id="initial-value-pad">
+                  <Frog
+                    id="initial-value-frog"
+                    padId="initial-value-pad"
+                  >
                     {initialValue}
                   </Frog>
                 </LilyPad>
@@ -51,7 +54,11 @@ class Demo extends Component {
               <ForegroundItemSet>
                 {values.map((value, index) => (
                   <span key={index}>
-                    <LilyPad tag={Span} id={`value-${index}-pad`}>
+                    <LilyPad
+                      tag="span"
+                      style={{ display: 'inline-block' }}
+                      id={`value-${index}-pad`}
+                    >
                       <Frog
                         id={`value-${index}-frog`}
                         padId={`value-${index}-pad`}
