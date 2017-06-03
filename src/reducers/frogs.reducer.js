@@ -1,11 +1,13 @@
 import { createSelector } from 'reselect'
 
+import { ADD_FROG, JUMP_TO_NEW_PAD } from '../actions';
+
 const initialState = {};
 
 
 export default function frogsReducer(state = initialState, action) {
   switch (action.type) {
-    case 'ADD_FROG':
+    case ADD_FROG:
       return {
         ...state,
         [action.id]: {
@@ -14,7 +16,7 @@ export default function frogsReducer(state = initialState, action) {
         },
       };
 
-    case 'JUMP_TO_NEW_PAD':
+    case JUMP_TO_NEW_PAD:
       return {
         ...state,
         [action.id]: {
