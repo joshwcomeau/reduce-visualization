@@ -18,7 +18,10 @@ class LilyPad extends PureComponent {
       PropTypes.string,
       PropTypes.func,
     ]).isRequired,
-    placeholder: PropTypes.string,
+    placeholder: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
     frogs: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.string.isRequired,
       padId: PropTypes.string.isRequired,
@@ -74,12 +77,9 @@ class LilyPad extends PureComponent {
 
     const showPlaceholder = frogs.length === 0;
 
-    if (id === 'acc') {
-      console.log({ showPlaceholder, ...this.props})
-    }
-
     const placeholderElem = (
       <span
+        key="placeholder"
         style={{
           position: 'absolute',
           top: 0,

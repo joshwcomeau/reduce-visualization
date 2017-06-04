@@ -1,34 +1,6 @@
 import styled from 'styled-components';
 
 
-export const Separator = styled.span`
-  color: palevioletred;
-  padding: 1rem;
-`;
-
-export const Span = styled.span`
-  display: inline-block;
-`;
-
-export const Row = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-export const Col = styled.div`
-  position: relative;
-  flex: 1;
-`
-
-export const LandingPadTestDiv = styled.div`
-  position: absolute;
-  left: 100px;
-  top: 300px;
-  width: 25px;
-  height: 25px;
-  border: 2px solid palevioletred;
-`;
-
 export const ReduceStatement = styled.div`
   font-size: 22px;
   font-family: monospace;

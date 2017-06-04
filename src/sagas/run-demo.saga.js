@@ -31,13 +31,13 @@ function* runAnimation(action) {
   yield delay(OPACITY_TIME_WITH_IDLE);
 
   // Animate the first translation, moving the initial value to `acc`
-  yield put(jumpToNewPad({ frogId: 'initial-value-frog', padId: 'acc'})),
+  yield put(jumpToNewPad({ frogId: 'initial-value-frog', padId: 'acc'}));
   yield delay(TRANSLATE_TIME_WITH_IDLE);
 
   // Animate the second translation, moving the first value to `item`
   yield put(focusLines({ lineIds: ['values', 'reduce-open'] }));
   yield delay(OPACITY_TIME_WITH_IDLE);
-  yield put(jumpToNewPad({ frogId: 'value-0-frog', padId: 'item'})),
+  yield put(jumpToNewPad({ frogId: 'value-0-frog', padId: 'item'}));
   yield delay(TRANSLATE_TIME_WITH_IDLE);
 
   // Focus the reduce body, in preparation for the merger

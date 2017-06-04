@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { beginAnimation } from '../actions';
@@ -11,12 +10,7 @@ import FadeOnChange from './FadeOnChange';
 import {
   Button,
   Card,
-  Col,
-  DataWithHeader,
-  ForegroundItemSet,
   ReduceStatement,
-  Row,
-  Span,
 } from './presentational-components';
 
 

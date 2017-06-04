@@ -7,7 +7,7 @@ import { OPACITY_DURATION } from '../constants';
 
 class Line extends Component {
   static propTypes = {
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     indented: PropTypes.bool,
     isFocused: PropTypes.bool,
     children: PropTypes.node,

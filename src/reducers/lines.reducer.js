@@ -1,5 +1,3 @@
-import { createSelector } from 'reselect'
-
 import { FOCUS_LINES, RESET_LINE_FOCUS } from '../actions';
 
 // NOTE: This is not a great solution.
