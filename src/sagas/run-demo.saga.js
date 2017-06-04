@@ -51,6 +51,8 @@ function* runAnimation(action) {
 
   // Run the smush animation, calculate and show the new `acc`
   yield put(toggleBodySquash());
+  yield delay(OPACITY_DURATION);
+  yield put(runReduceLogic());
   yield delay(OPACITY_TIME_WITH_IDLE);
 
 }

@@ -27,6 +27,8 @@ class Demo extends Component {
       squashBody,
     } = this.props;
 
+    console.log('Rednering', acc)
+
     return (
       <div>
         <Button onClick={beginAnimation}>
@@ -95,15 +97,32 @@ class Demo extends Component {
             </Line>
             <Line id="reduce-body" indented>
               {'return '}
-              <SquashChildren>
-                <FadeOnChange>
-                  {showAccAndItemInBody ? acc : 'acc'}
-                </FadeOnChange>
-                {!squashBody && <span>{' + '}</span>}
+              <SquashChildren
+                style={{
+                  width: 135,
+                  display: 'inline-flex',
+                  justifyContent: 'space-between',
+                }}
+              >
+                {!squashBody && (
+                  <FadeOnChange>
+                    {showAccAndItemInBody ? acc : 'acc'}
+                  </FadeOnChange>
+                )}
+                {!squashBody && (
+                  <span style={{ display: 'inline-block' }}>
+                    {'+'}
+                  </span>
+                )}
                 {!squashBody && (
                   <FadeOnChange>
                     {showAccAndItemInBody ? item : 'item'}
                   </FadeOnChange>
+                )}
+                {squashBody && (
+                  <span>
+                    {acc}
+                  </span>
                 )}
               </SquashChildren>
             </Line>

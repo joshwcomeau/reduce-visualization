@@ -22,7 +22,10 @@ class FadeOnChange extends Component {
   ))
 
   shouldComponentUpdate(nextProps, nextState) {
-    return this.state.children !== nextState.children || this.props.children !== nextProps.children;
+    return (
+      this.state.children !== nextState.children ||
+      this.props.children !== nextProps.children
+    );
   }
 
   componentDidUpdate(prevProps, prevState) {

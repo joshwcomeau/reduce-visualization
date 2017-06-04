@@ -1,11 +1,12 @@
 // `SquashChildren` is a utility component that will "merge" its children
 // on update. Specifically:
-//  - When the number of children changes from 2 to 1, it translates them
-//    both to a midpoint between them, and fades into the 1 new child.
+//  - When the number of children shrinks to 1, all items converge on this
+//    first point.
 //  - When the number of children changes from 1 to 2, the 1 child fades out
 //    and the two children fade in.
 import React, { Children, PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import omit from 'lodash/omit';
 
 import { OPACITY_DURATION } from '../constants';
 import {
@@ -31,13 +32,6 @@ class SquashChildren extends PureComponent {
     this.setState(newState, resolve)
   ))
 
-  getTruthyChildArray(children) {
-    return Children
-      .toArray(children)
-      .filter(child => !!child)
-      .slice(0, 3);
-  }
-
   componentWillReceiveProps(nextProps) {
     const children = this.getTruthyChildArray(this.props.children);
     const nextChildren = this.getTruthyChildArray(nextProps.children);
@@ -61,32 +55,6 @@ class SquashChildren extends PureComponent {
           this.setState({ children: nextChildren });
         });
     }
-
-
-
-
-
-    // // This is a pretty gross sequence of events, but this is a surprisingly
-    // // tricky problem!
-    // //
-    // // We can't simply render the props, because then the text will change
-    // // RIGHT AWAY, before it even starts fading away. So instead we render
-    // // the state.children, and only do that swap when it's invisible.
-    // // This sequence of events is required to ensure that the swap happens at
-    // // the right time, and the animation works.
-    // requestAnimationFramePromise()
-    //   .then(() => { this.childElem.style.opacity = 0; })
-    //   .then(() => setTimeoutPromise(OPACITY_DURATION))
-    //   .then(() => this.setStatePromise({ children: this.props.children }))
-    //   .then(() => { this.childElem.style.opacity = 1; })
-    //   .catch(() => {
-    //     // Swallow errors. The most likely error here is that the component
-    //     // unmounted during the delay between fades. This isn't a big deal.
-    //     //
-    //     // At any rate, this is just a presentational thing with no network
-    //     // side effects, so it's safe to ignore whatever it wants to complain
-    //     // about.
-    //   });
   }
 
   childrenChecks(children) {
@@ -108,6 +76,13 @@ class SquashChildren extends PureComponent {
     }
   }
 
+  getTruthyChildArray(children) {
+    return Children
+      .toArray(children)
+      .filter(child => !!child)
+      .slice(0, 3);
+  }
+
   shrinkChildren() {
     // We need to capture some info about each child:
     //   - Element bounding box
@@ -118,18 +93,19 @@ class SquashChildren extends PureComponent {
     const [firstCenter, secondCenter, thirdCenter] = childrenCenters;
     const [firstElem, secondElem, thirdElem] = this.childrenRefs;
 
-    // Translate extremity children to the converge point.
-    const firstChildOffset = {
-      left: secondCenter.x - firstCenter.x,
-      top: secondCenter.y - firstCenter.y,
+    // Translate n+1 children onto the first's location.
+    // TODO: Nicer solution that works for >3 children
+    const secondChildOffset = {
+      left: firstCenter.x - secondCenter.x,
+      top: firstCenter.y - secondCenter.y,
     };
-    firstElem.style.transform = (
-      `translate(${firstChildOffset.left}px, ${firstChildOffset.top}px)`
+    secondElem.style.transform = (
+      `translate(${secondChildOffset.left}px, ${secondChildOffset.top}px)`
     );
 
     const thirdChildOffset = {
-      left: secondCenter.x - thirdCenter.x,
-      top: secondCenter.y - thirdCenter.y,
+      left: firstCenter.x - thirdCenter.x,
+      top: firstCenter.y - thirdCenter.y,
     };
     thirdElem.style.transform = (
       `translate(${thirdChildOffset.left}px, ${thirdChildOffset.top}px)`
@@ -143,17 +119,21 @@ class SquashChildren extends PureComponent {
   }
 
   render() {
+    const delegated = omit(this.props, Object.keys(SquashChildren.propTypes));
+
     const children = this.getTruthyChildArray(this.state.children);
 
     return (
-      <span>
+      <span {...delegated}>
         {children.map((child, index) => (
           React.cloneElement(child, {
             key: child.id,
             ref: (elem) => {
               this.childrenRefs[index] = getNativeNode(elem);
             },
-            style: { transition: `transform ${OPACITY_DURATION}ms` },
+            style: {
+              transition: `transform ${OPACITY_DURATION}ms`,
+            },
           })
         ))}
       </span>
