@@ -84,6 +84,7 @@ class LilyPad extends PureComponent {
           position: 'absolute',
           top: 0,
           left: 0,
+          right: 0,
           opacity: showPlaceholder ? 0.25 : 0,
           transition: `opacity ${OPACITY_DURATION}ms`,
         }}

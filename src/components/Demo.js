@@ -81,7 +81,11 @@ class Demo extends Component {
               {
                 <LilyPad
                   id="acc"
-                  style={{ display: 'inline-block', width: 40 }}
+                  style={{
+                    display: 'inline-block',
+                    textAlign: 'center',
+                    width: 70,
+                  }}
                   placeholder="acc"
                 />
               }
@@ -89,7 +93,11 @@ class Demo extends Component {
               {
                 <LilyPad
                   id="item"
-                  style={{ display: 'inline-block', width: 70 }}
+                  style={{
+                    display: 'inline-block',
+                    textAlign: 'center',
+                    width: 70,
+                  }}
                   placeholder="&nbsp;item"
                 />
               }
