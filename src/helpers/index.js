@@ -6,3 +6,11 @@ export const getElementCenter = elem => {
     y: bb.top + (bb.height / 2),
   };
 }
+
+export const requestAnimationFramePromise = () => new Promise(resolve => (
+  window.requestAnimationFrame(resolve)
+));
+
+export const setTimeoutPromise = (duration) => new Promise(resolve => (
+  window.setTimeout(resolve, duration)
+));

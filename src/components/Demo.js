@@ -7,6 +7,7 @@ import { beginAnimation } from '../actions';
 import LilyPad from './LilyPad';
 import Frog from './Frog';
 import Line from './Line';
+import FadeOnChange from './FadeOnChange';
 import {
   Button,
   Card,
@@ -21,7 +22,14 @@ import {
 
 class Demo extends Component {
   render() {
-    const { beginAnimation, initialValue, values } = this.props;
+    const {
+      beginAnimation,
+      initialValue,
+      values,
+      acc,
+      item,
+      showAccAndItemInBody,
+    } = this.props;
 
     return (
       <div>
@@ -35,6 +43,7 @@ class Demo extends Component {
               {'const initialValue = '}
               <LilyPad
                 tag="span"
+                style={{ display: 'inline-block', width: 14 }}
                 id="initial-value-pad"
                 placeholder={initialValue}
               >
@@ -53,7 +62,7 @@ class Demo extends Component {
                 <span key={index}>
                   <LilyPad
                     tag="span"
-                    style={{ display: 'inline-block' }}
+                    style={{ display: 'inline-block', width: 14 }}
                     id={`value-${index}-pad`}
                     placeholder={value}
                   >
@@ -79,18 +88,26 @@ class Demo extends Component {
                   placeholder="acc"
                 />
               }
-              {', '}
+              {','}
               {
                 <LilyPad
                   id="item"
-                  style={{ display: 'inline-block', width: 54 }}
-                  placeholder="item"
+                  style={{ display: 'inline-block', width: 70 }}
+                  placeholder="&nbsp;item"
                 />
               }
               {') => {'}
             </Line>
             <Line id="reduce-body" indented>
-              {'return acc + item;'}
+              {'return '}
+              <FadeOnChange>
+                {showAccAndItemInBody ? acc : 'acc'}
+              </FadeOnChange>
+              {' + '}
+              <FadeOnChange>
+                {showAccAndItemInBody ? item : 'item'}
+              </FadeOnChange>
+              {';'}
             </Line>
             <Line id="reduce-close">
               {'}, initialValue);'}
@@ -104,7 +121,10 @@ class Demo extends Component {
 
 const mapStateToProps = state => ({
   values: state.reducingData.values,
-  initialValue: state.reducingData.initialValue
+  initialValue: state.reducingData.initialValue,
+  acc: state.reducingData.acc,
+  item: state.reducingData.item,
+  showAccAndItemInBody: state.reducingData.showAccAndItemInBody,
 });
 
 const mapDispatchToProps = {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { LINE_OPACITY_DURATION } from '../constants';
+import { OPACITY_DURATION } from '../constants';
 
 
 class Line extends Component {
@@ -21,7 +21,7 @@ class Line extends Component {
         style={{
           opacity: isFocused ? 1 : 0.25,
           paddingLeft: indented ? 40 : 0,
-          transition: `opacity ${LINE_OPACITY_DURATION}ms`,
+          transition: `opacity ${OPACITY_DURATION}ms`,
         }}
       >
         {children}

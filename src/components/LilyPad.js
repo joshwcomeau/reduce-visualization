@@ -5,6 +5,7 @@ import omit from 'lodash/omit';
 import isObject from 'lodash/isObject';
 
 import { addLilyPad, addFrog } from '../actions';
+import { OPACITY_DURATION } from '../constants';
 import { frogsListSelector } from '../reducers/frogs.reducer';
 
 import Frog from './Frog';
@@ -71,9 +72,25 @@ class LilyPad extends PureComponent {
     const { id, tag, frogs, placeholder } = this.props;
     const delegated = omit(this.props, Object.keys(LilyPad.propTypes));
 
-    const renderedChildren = frogs.length > 0
-      ? this.renderFrogs()
-      : <span style={{ opacity: 0.5 }}>{placeholder}</span>;
+    const showPlaceholder = frogs.length === 0;
+
+    if (id === 'acc') {
+      console.log({ showPlaceholder, ...this.props})
+    }
+
+    const placeholderElem = (
+      <span
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          opacity: showPlaceholder ? 0.25 : 0,
+          transition: `opacity ${OPACITY_DURATION}ms`,
+        }}
+      >
+        {placeholder}
+      </span>
+    )
 
     return React.createElement(
       tag,
@@ -81,8 +98,18 @@ class LilyPad extends PureComponent {
         id,
         ref: elem => this.elem = elem,
         ...delegated,
+        style: {
+          position: 'relative',
+          height: 25,
+          lineHeight: '35px',
+          textAlign: 'center',
+          ...(delegated.style || {})
+        },
       },
-      renderedChildren
+      [
+        frogs.length > 0 && this.renderFrogs(),
+        placeholderElem
+      ]
     );
   }
 }

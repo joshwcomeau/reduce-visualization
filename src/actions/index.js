@@ -6,6 +6,8 @@ export const UPDATE_FROG_LOCATION = 'UPDATE_FROG_LOCATION';
 export const JUMP_TO_NEW_PAD = 'JUMP_TO_NEW_PAD';
 export const FOCUS_LINES = 'FOCUS_LINES';
 export const RESET_LINE_FOCUS = 'RESET_LINE_FOCUS';
+export const RUN_REDUCE_LOGIC = 'RUN_REDUCE_LOGIC';
+export const TOGGLE_REDUCE_VALUES_IN_BODY = 'TOGGLE_REDUCE_VALUES_IN_BODY';
 
 export const beginAnimation = () => ({
   type: BEGIN_ANIMATION,
@@ -49,4 +51,12 @@ export const focusLines = ({ lineIds }) => ({
 
 export const resetLineFocus = () => ({
   type: RESET_LINE_FOCUS,
+});
+
+export const runReduceLogic = () => ({
+  type: RUN_REDUCE_LOGIC,
+});
+
+export const toggleReduceValuesInBody = () => ({
+  type: TOGGLE_REDUCE_VALUES_IN_BODY,
 });
