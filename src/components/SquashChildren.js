@@ -113,32 +113,25 @@ class SquashChildren extends PureComponent {
     //   - Element bounding box
     //   - Element center point
     //   - Element itself
-    const childrenElemData = this.childrenRefs.map(ref => {
-      const boundingBox = ref.getBoundingClientRect();
+    const childrenCenters = this.childrenRefs.map(getElementCenter);
 
-      return {
-        ref,
-        boundingBox,
-        center: getElementCenter(ref),
-      }
-    });
-
-    const [firstElem, secondElem, thirdElem] = childrenElemData;
+    const [firstCenter, secondCenter, thirdCenter] = childrenCenters;
+    const [firstElem, secondElem, thirdElem] = this.childrenRefs;
 
     // Translate extremity children to the converge point.
     const firstChildOffset = {
-      left: secondElem.center.x - firstElem.center.x,
-      top: secondElem.center.y - firstElem.center.y,
+      left: secondCenter.x - firstCenter.x,
+      top: secondCenter.y - firstCenter.y,
     };
-    firstElem.ref.style.transform = (
+    firstElem.style.transform = (
       `translate(${firstChildOffset.left}px, ${firstChildOffset.top}px)`
     );
 
     const thirdChildOffset = {
-      left: secondElem.center.x - thirdElem.center.x,
-      top: secondElem.center.y - thirdElem.center.y,
+      left: secondCenter.x - thirdCenter.x,
+      top: secondCenter.y - thirdCenter.y,
     };
-    thirdElem.ref.style.transform = (
+    thirdElem.style.transform = (
       `translate(${thirdChildOffset.left}px, ${thirdChildOffset.top}px)`
     );
 
