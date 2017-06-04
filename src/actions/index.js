@@ -8,6 +8,7 @@ export const FOCUS_LINES = 'FOCUS_LINES';
 export const RESET_LINE_FOCUS = 'RESET_LINE_FOCUS';
 export const RUN_REDUCE_LOGIC = 'RUN_REDUCE_LOGIC';
 export const TOGGLE_REDUCE_VALUES_IN_BODY = 'TOGGLE_REDUCE_VALUES_IN_BODY';
+export const TOGGLE_BODY_SQUASH = 'TOGGLE_BODY_SQUASH';
 
 export const beginAnimation = () => ({
   type: BEGIN_ANIMATION,
@@ -60,3 +61,7 @@ export const runReduceLogic = () => ({
 export const toggleReduceValuesInBody = () => ({
   type: TOGGLE_REDUCE_VALUES_IN_BODY,
 });
+
+export const toggleBodySquash = () => ({
+  type: TOGGLE_BODY_SQUASH,
+})

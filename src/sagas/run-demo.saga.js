@@ -9,6 +9,7 @@ import {
   jumpToNewPad,
   runReduceLogic,
   toggleReduceValuesInBody,
+  toggleBodySquash,
 } from '../actions';
 import {
   OPACITY_DURATION,
@@ -46,9 +47,12 @@ function* runAnimation(action) {
 
   // Show the initial acc/item values in the function.
   yield put(toggleReduceValuesInBody());
+  yield delay(OPACITY_TIME_WITH_IDLE);
 
   // Run the smush animation, calculate and show the new `acc`
-  // TODO
+  yield put(toggleBodySquash());
+  yield delay(OPACITY_TIME_WITH_IDLE);
+
 }
 
 export default function* () {

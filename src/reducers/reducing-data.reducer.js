@@ -1,4 +1,4 @@
-import { RUN_REDUCE_LOGIC, TOGGLE_REDUCE_VALUES_IN_BODY } from '../actions';
+import { RUN_REDUCE_LOGIC } from '../actions';
 
 const initialState = {
   initialValue: 0,
@@ -6,7 +6,6 @@ const initialState = {
   acc: 0,
   item: 1,
   currentIndex: 0,
-  showAccAndItemInBody: false,
 };
 
 
@@ -20,11 +19,6 @@ export default function reducingDataReducer(state = initialState, action) {
         currentIndex: state.currentIndex + 1,
       };
 
-    case TOGGLE_REDUCE_VALUES_IN_BODY:
-      return {
-        ...state,
-        showAccAndItemInBody: !state.showAccAndItemInBody,
-      };
 
     default: return state;
   }

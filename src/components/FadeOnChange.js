@@ -1,14 +1,14 @@
 // `FadeOnChange` is a utility component that will fade a component out/in
 // whenever its props change. It's a way of highlighting that a section of
 // the page has changed (eg. subtitle text changed).
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { OPACITY_DURATION } from '../constants';
 import { requestAnimationFramePromise, setTimeoutPromise } from '../helpers';
 
 
-class FadeOnChange extends PureComponent {
+class FadeOnChange extends Component {
   static propTypes = {
     children: PropTypes.node,
   }
@@ -20,6 +20,10 @@ class FadeOnChange extends PureComponent {
   setStatePromise = newState => new Promise(resolve => (
     this.setState(newState, resolve)
   ))
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.state.children !== nextState.children || this.props.children !== nextProps.children;
+  }
 
   componentDidUpdate(prevProps, prevState) {
     // Ignore state-change updates, since these updates only happen mid-fade
@@ -52,7 +56,7 @@ class FadeOnChange extends PureComponent {
   }
 
   render() {
-    const transition = `opacity ${OPACITY_DURATION}ms`;
+    const transition = `${OPACITY_DURATION}ms`;
 
     return (
       <div

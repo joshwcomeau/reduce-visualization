@@ -7,6 +7,7 @@ import LilyPad from './LilyPad';
 import Frog from './Frog';
 import Line from './Line';
 import FadeOnChange from './FadeOnChange';
+import SquashChildren from './SquashChildren';
 import {
   Button,
   Card,
@@ -23,6 +24,7 @@ class Demo extends Component {
       acc,
       item,
       showAccAndItemInBody,
+      squashBody,
     } = this.props;
 
     return (
@@ -48,7 +50,6 @@ class Demo extends Component {
                   {initialValue}
                 </Frog>
               </LilyPad>
-              {';'}
             </Line>
             <Line id="values">
               {'const values = ['}
@@ -70,7 +71,7 @@ class Demo extends Component {
                   {(index < values.length - 1) && ', '}
                 </span>
               ))}
-              {'];'}
+              {']'}
             </Line>
             <br />
             <Line id="reduce-open">
@@ -94,17 +95,20 @@ class Demo extends Component {
             </Line>
             <Line id="reduce-body" indented>
               {'return '}
-              <FadeOnChange>
-                {showAccAndItemInBody ? acc : 'acc'}
-              </FadeOnChange>
-              {' + '}
-              <FadeOnChange>
-                {showAccAndItemInBody ? item : 'item'}
-              </FadeOnChange>
-              {';'}
+              <SquashChildren>
+                <FadeOnChange>
+                  {showAccAndItemInBody ? acc : 'acc'}
+                </FadeOnChange>
+                {!squashBody && <span>{' + '}</span>}
+                {!squashBody && (
+                  <FadeOnChange>
+                    {showAccAndItemInBody ? item : 'item'}
+                  </FadeOnChange>
+                )}
+              </SquashChildren>
             </Line>
             <Line id="reduce-close">
-              {'}, initialValue);'}
+              {'}, initialValue)'}
             </Line>
           </ReduceStatement>
         </Card>
@@ -118,7 +122,8 @@ const mapStateToProps = state => ({
   initialValue: state.reducingData.initialValue,
   acc: state.reducingData.acc,
   item: state.reducingData.item,
-  showAccAndItemInBody: state.reducingData.showAccAndItemInBody,
+  showAccAndItemInBody: state.animation.showAccAndItemInBody,
+  squashBody: state.animation.squashBody,
 });
 
 const mapDispatchToProps = {
