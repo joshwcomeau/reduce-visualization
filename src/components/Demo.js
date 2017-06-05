@@ -27,7 +27,11 @@ class Demo extends Component {
       squashBody,
     } = this.props;
 
-    console.log('Rednering', acc)
+    const reduceBodyItemStyles = {
+      display: 'inline-block',
+      width: 52,
+      textAlign: 'center',
+    };
 
     return (
       <div>
@@ -113,7 +117,7 @@ class Demo extends Component {
                 }}
               >
                 {!squashBody && (
-                  <FadeOnChange>
+                  <FadeOnChange styles={reduceBodyItemStyles}>
                     {showAccAndItemInBody ? acc : 'acc'}
                   </FadeOnChange>
                 )}
@@ -123,12 +127,12 @@ class Demo extends Component {
                   </span>
                 )}
                 {!squashBody && (
-                  <FadeOnChange>
+                  <FadeOnChange styles={reduceBodyItemStyles}>
                     {showAccAndItemInBody ? item : 'item'}
                   </FadeOnChange>
                 )}
                 {squashBody && (
-                  <span>
+                  <span style={reduceBodyItemStyles}>
                     {acc}
                   </span>
                 )}

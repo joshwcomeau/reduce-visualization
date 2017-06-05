@@ -10,7 +10,12 @@ import { requestAnimationFramePromise, setTimeoutPromise } from '../helpers';
 
 class FadeOnChange extends Component {
   static propTypes = {
+    styles: PropTypes.object,
     children: PropTypes.node,
+  }
+
+  static defaultProps = {
+    styles: {},
   }
 
   state = {
@@ -59,11 +64,12 @@ class FadeOnChange extends Component {
   }
 
   render() {
+    const { styles } = this.props;
     const transition = `${OPACITY_DURATION}ms`;
 
     return (
       <div
-        style={{ display: 'inline-block', transition }}
+        style={{ display: 'inline-block', transition, ...styles }}
         ref={elem => this.childElem = elem}
       >
         {this.state.children}

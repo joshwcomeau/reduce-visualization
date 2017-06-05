@@ -133,6 +133,7 @@ class SquashChildren extends PureComponent {
             },
             style: {
               transition: `transform ${OPACITY_DURATION}ms`,
+              ...(child.props.style || {})
             },
           })
         ))}
