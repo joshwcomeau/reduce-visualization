@@ -55,6 +55,16 @@ class SquashChildren extends PureComponent {
           this.setState({ children: nextChildren });
         });
     }
+
+    // If the number is growing, we simply want to fade the children out.
+    // quickly, update them so all 3 are in the DOM, and then fade them in.
+    const isGrowing = children.length === 1 && nextChildren.length > 1;
+    if (isGrowing) {
+      this.setState({ children: nextChildren });
+      window.requestAnimationFrame(() => {
+        console.log('CHILDREFS', this.childrenRefs);
+      })
+    }
   }
 
   childrenChecks(children) {
@@ -118,10 +128,23 @@ class SquashChildren extends PureComponent {
     return setTimeoutPromise(OPACITY_DURATION);
   }
 
+  // growChildren() {
+  //   this.childrenRefs.forEach(childRef => {
+  //     childRef.style.opacity = 0;
+  //   });
+  //
+  //   setTimeoutPromise(OPACITY_DURATION)
+  //     .then(() => {
+  //       this.setState({})
+  //     })
+  // }
+
   render() {
     const delegated = omit(this.props, Object.keys(SquashChildren.propTypes));
 
     const children = this.getTruthyChildArray(this.state.children);
+
+    console.log('Render squashChildren', children.length, children)
 
     return (
       <span {...delegated}>
@@ -132,7 +155,7 @@ class SquashChildren extends PureComponent {
               this.childrenRefs[index] = getNativeNode(elem);
             },
             style: {
-              transition: `transform ${OPACITY_DURATION}ms`,
+              transition: `${OPACITY_DURATION}ms`,
               ...(child.props.style || {})
             },
           })

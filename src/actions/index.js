@@ -2,8 +2,9 @@ export const BEGIN_ANIMATION = 'BEGIN_ANIMATION';
 export const RESET_ANIMATION = 'RESET_ANIMATION';
 export const ADD_FROG = 'ADD_FROG';
 export const ADD_LILY_PAD = 'ADD_LILY_PAD';
-export const UPDATE_FROG_LOCATION = 'UPDATE_FROG_LOCATION';
 export const JUMP_TO_NEW_PAD = 'JUMP_TO_NEW_PAD';
+export const UPDATE_FROG = 'UPDATE_FROG';
+export const KILL_FROG = 'KILL_FROG';
 export const FOCUS_LINES = 'FOCUS_LINES';
 export const RESET_LINE_FOCUS = 'RESET_LINE_FOCUS';
 export const RUN_REDUCE_LOGIC = 'RUN_REDUCE_LOGIC';
@@ -32,17 +33,21 @@ export const addLilyPad = ({ id, elem }) => ({
   elem,
 });
 
-export const updateFrogLocation = ({ id, top, left }) => ({
-  type: UPDATE_FROG_LOCATION,
-  id,
-  top,
-  left
-});
-
 export const jumpToNewPad = ({ frogId, padId }) => ({
   type: JUMP_TO_NEW_PAD,
   frogId,
   padId,
+});
+
+export const updateFrog = ({ id, ...updatedData }) => ({
+  type: UPDATE_FROG,
+  id,
+  ...updatedData,
+});
+
+export const killFrog = ({ id }) => ({
+  type: KILL_FROG,
+  id,
 });
 
 export const focusLines = ({ lineIds }) => ({

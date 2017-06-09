@@ -33,6 +33,8 @@ class Demo extends Component {
       textAlign: 'center',
     };
 
+    console.log('Rendering', {squashBody})
+
     return (
       <div>
         <Button onClick={beginAnimation}>
@@ -50,7 +52,7 @@ class Demo extends Component {
                 placeholder={initialValue}
               >
                 <Frog
-                  id="initial-value-frog"
+                  id="acc-frog"
                   padId="initial-value-pad"
                 >
                   {initialValue}
@@ -84,7 +86,7 @@ class Demo extends Component {
               {'values.reduce(('}
               {
                 <LilyPad
-                  id="acc"
+                  id="param-acc"
                   style={{
                     display: 'inline-block',
                     textAlign: 'center',
@@ -96,7 +98,7 @@ class Demo extends Component {
               {','}
               {
                 <LilyPad
-                  id="item"
+                  id="param-item"
                   style={{
                     display: 'inline-block',
                     textAlign: 'center',
@@ -107,6 +109,7 @@ class Demo extends Component {
               }
               {') => {'}
             </Line>
+
             <Line id="reduce-body" indented>
               {'return '}
               <SquashChildren
@@ -116,28 +119,26 @@ class Demo extends Component {
                   justifyContent: 'space-between',
                 }}
               >
-                {!squashBody && (
-                  <FadeOnChange styles={reduceBodyItemStyles}>
-                    {showAccAndItemInBody ? acc : 'acc'}
-                  </FadeOnChange>
-                )}
+                <LilyPad
+                  id="body-acc"
+                  style={reduceBodyItemStyles}
+                  placeholder="acc"
+                />
                 {!squashBody && (
                   <span style={{ display: 'inline-block' }}>
                     {'+'}
                   </span>
                 )}
                 {!squashBody && (
-                  <FadeOnChange styles={reduceBodyItemStyles}>
-                    {showAccAndItemInBody ? item : 'item'}
-                  </FadeOnChange>
-                )}
-                {squashBody && (
-                  <span style={reduceBodyItemStyles}>
-                    {acc}
-                  </span>
+                  <LilyPad
+                    id="body-item"
+                    style={reduceBodyItemStyles}
+                    placeholder="item"
+                  />
                 )}
               </SquashChildren>
             </Line>
+
             <Line id="reduce-close">
               {'}, initialValue)'}
             </Line>

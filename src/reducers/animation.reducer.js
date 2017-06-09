@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 
 import {
   BEGIN_ANIMATION,
+  END_ANIMATION,
   RESET_ANIMATION,
   TOGGLE_REDUCE_VALUES_IN_BODY,
   TOGGLE_BODY_SQUASH,
@@ -9,16 +10,18 @@ import {
 
 
 const initialState = {
-  isRunning: false,
+  status: 'idle',
+  hasCompleted: false,
   showAccAndItemInBody: false,
   squashBody: false,
 };
 
 
-const isRunning = (state = initialState.isRunning, action) => {
+const status = (state = initialState.status, action) => {
   switch (action.type) {
-    case BEGIN_ANIMATION:  return true;
-    case RESET_ANIMATION: return false;
+    case BEGIN_ANIMATION:  return 'running';
+    case END_ANIMATION:  return 'completed';
+    case RESET_ANIMATION: return 'idle';
 
     default: return state;
   }
@@ -42,4 +45,8 @@ const squashBody = (state = initialState.squashBody, action) => {
 }
 
 
-export default combineReducers({ isRunning, showAccAndItemInBody, squashBody });
+export default combineReducers({
+  status,
+  showAccAndItemInBody,
+  squashBody
+});

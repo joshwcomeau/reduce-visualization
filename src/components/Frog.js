@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import omit from 'lodash/omit';
 
-import { updateFrogLocation } from '../actions';
 import { TRANSLATE_DURATION } from '../constants';
 import { getElementCenter } from '../helpers';
 
@@ -14,7 +13,6 @@ class Frog extends PureComponent {
     padId: PropTypes.string.isRequired,
     lastLilyPad: PropTypes.object,
     tag: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-    updateFrogLocation: PropTypes.func.isRequired,
     children: PropTypes.node,
   }
 
@@ -46,7 +44,6 @@ class Frog extends PureComponent {
         this.elem.style.transform = 'translate(0px, 0px)';
       });
     });
-
   }
 
   render() {
@@ -78,6 +75,5 @@ const mapStateToProps = (state, ownProps) => {
 
   return { lastLilyPad: state.lilyPads[frog.lastPadId] };
 };
-const mapDispatchToProps = { updateFrogLocation }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Frog);
+export default connect(mapStateToProps, {})(Frog);
