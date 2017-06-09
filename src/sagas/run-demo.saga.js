@@ -12,6 +12,7 @@ import {
   toggleBodySquash,
   updateFrog,
   killFrog,
+  endAnimation,
 } from '../actions';
 import {
   OPACITY_DURATION,
@@ -58,7 +59,7 @@ function* runAnimation(action) {
       frogId: 'acc-frog',
       padId: 'body-acc',
     }));
-    yield delay(TRANSLATE_TIME_WITH_IDLE / 3);
+    yield delay(OPACITY_DURATION / 2);
     yield put(jumpToNewPad({
       frogId: `value-${index}-frog`,
       padId: 'body-item',
@@ -91,17 +92,18 @@ function* runAnimation(action) {
       yield delay(OPACITY_TIME_WITH_IDLE);
 
       yield put(jumpToNewPad({
-        frogId: `value-${index+1}-frog`,
+        frogId: `value-${index + 1}-frog`,
         padId: 'param-item',
       }));
       yield delay(TRANSLATE_TIME_WITH_IDLE);
     }
-
-    yield put(focusLines({ lineIds: ['reduce-body'] }));
-    yield delay(OPACITY_TIME_WITH_IDLE + 400);
-
-    yield put(endAnimation());
   }
+
+  yield put(focusLines({ lineIds: ['reduce-body', 'reduce-open'] }));
+  yield delay(OPACITY_DURATION);
+
+  yield put(endAnimation());
+
 }
 
 export default function* () {

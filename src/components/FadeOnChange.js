@@ -69,7 +69,7 @@ class FadeOnChange extends Component {
 
     return (
       <div
-        style={{ display: 'inline-block', transition, ...styles }}
+        style={{ display: 'inline-block', transition, styles }}
         ref={elem => this.childElem = elem}
       >
         {this.state.children}

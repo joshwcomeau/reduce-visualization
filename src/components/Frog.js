@@ -55,7 +55,9 @@ class Frog extends PureComponent {
       {
         id,
         ref: elem => this.elem = elem,
-        style: { display: 'inline-block' },
+        style: {
+          display: 'inline-block',
+        },
         ...delegated,
       },
       children

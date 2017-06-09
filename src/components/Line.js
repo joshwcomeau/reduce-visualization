@@ -20,8 +20,9 @@ class Line extends Component {
       <div
         style={{
           opacity: isFocused ? 1 : 0.25,
-          paddingLeft: indented ? 40 : 0,
+          paddingLeft: indented ? 28 : 0,
           transition: `opacity ${OPACITY_DURATION}ms`,
+          lineHeight: 1.3,
         }}
       >
         {children}
