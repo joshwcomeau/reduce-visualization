@@ -27,10 +27,6 @@ class Frog extends PureComponent {
     // that pad, and then smoothly transition it onto its current position.
     const { lastLilyPad } = this.props;
 
-    if (this.props.id === 'acc-frog') {
-      console.log('Acc frog mount', this.props);
-    }
-
     if (!lastLilyPad) {
       return;
     }
