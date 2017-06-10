@@ -12,8 +12,9 @@ const Header = ({ beginAnimation, hasStarted, hasFinished }) => (
     </HeaderParagraph>
 
     <HeaderParagraph>
-      This visualization aims to explain how data flows through each iteration in reduce, by following the variables. Hope it helps!
+      This visualization aims to show how data flows through each iteration, by following the variables. Hope it helps!
     </HeaderParagraph>
+    <br /><br />
 
     <Button onClick={beginAnimation} disabled={hasStarted}>
         {hasFinished

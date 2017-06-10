@@ -5,7 +5,11 @@ import omit from 'lodash/omit';
 import isObject from 'lodash/isObject';
 
 import { addLilyPad, addFrog } from '../actions';
-import { OPACITY_DURATION } from '../constants';
+import {
+  OPACITY_DURATION,
+  BLUE,
+  GRAY_BLUE,
+} from '../constants';
 import { frogsListSelector } from '../reducers/frogs.reducer';
 
 import Frog from './Frog';
@@ -85,7 +89,8 @@ class LilyPad extends PureComponent {
           top: 0,
           left: 0,
           right: 0,
-          opacity: showPlaceholder ? 0.25 : 0,
+          opacity: showPlaceholder ? 0.85 : 0,
+          color: GRAY_BLUE,
           transition: `opacity ${OPACITY_DURATION}ms`,
         }}
       >
@@ -104,6 +109,7 @@ class LilyPad extends PureComponent {
           height: 25,
           lineHeight: '35px',
           textAlign: 'center',
+          color: BLUE,
           ...(delegated.style || {})
         },
       },

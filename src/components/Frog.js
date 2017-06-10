@@ -34,7 +34,7 @@ class Frog extends PureComponent {
     const formerCenter = getElementCenter(lastLilyPad.elem);
     const currentCenter = getElementCenter(this.elem);
 
-    const top = formerCenter.y - currentCenter.y;
+    const top = formerCenter.y - currentCenter.y + 5;
     const left = formerCenter.x - currentCenter.x;
 
     this.elem.style.transform = `translate(${left}px, ${top}px)`;

@@ -8,9 +8,13 @@ import { OPACITY_DURATION } from '../constants';
 class Line extends Component {
   static propTypes = {
     id: PropTypes.string.isRequired,
-    indented: PropTypes.bool,
+    indented: PropTypes.number,
     isFocused: PropTypes.bool,
     children: PropTypes.node,
+  }
+
+  static defaultProps = {
+    indented: 0,
   }
 
   render() {
@@ -20,7 +24,7 @@ class Line extends Component {
       <div
         style={{
           opacity: isFocused ? 1 : 0.25,
-          paddingLeft: indented ? 28 : 0,
+          paddingLeft: indented * 28,
           transition: `opacity ${OPACITY_DURATION}ms`,
           lineHeight: 1.3,
         }}

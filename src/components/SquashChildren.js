@@ -11,7 +11,6 @@ import omit from 'lodash/omit';
 import { OPACITY_DURATION } from '../constants';
 import {
   getElementCenter,
-  requestAnimationFramePromise,
   setTimeoutPromise,
   getNativeNode,
 } from '../helpers';
@@ -127,17 +126,6 @@ class SquashChildren extends PureComponent {
     // buggy and problematic for me, so I'm just going to use a setTimeout.
     return setTimeoutPromise(OPACITY_DURATION);
   }
-
-  // growChildren() {
-  //   this.childrenRefs.forEach(childRef => {
-  //     childRef.style.opacity = 0;
-  //   });
-  //
-  //   setTimeoutPromise(OPACITY_DURATION)
-  //     .then(() => {
-  //       this.setState({})
-  //     })
-  // }
 
   render() {
     const delegated = omit(this.props, Object.keys(SquashChildren.propTypes));

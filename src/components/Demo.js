@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import FlipMove from 'react-flip-move';
 
 import { OPACITY_DURATION } from '../constants';
@@ -11,7 +12,6 @@ import Line from './Line';
 import FadeOnChange from './FadeOnChange';
 import SquashChildren from './SquashChildren';
 import {
-  Button,
   Card,
   ReduceStatement,
   Small,
@@ -20,6 +20,16 @@ import {
 
 
 class Demo extends Component {
+  static propTypes = {
+    isMobile: PropTypes.bool.isRequired,
+    values: PropTypes.arrayOf(PropTypes.number),
+    initialValue: PropTypes.number,
+    acc: PropTypes.number,
+    item: PropTypes.number,
+    status: PropTypes.string,
+    squashBody: PropTypes.bool,
+  }
+
   renderInitialDefinitions() {
     const { initialValue, values } = this.props;
 
@@ -69,7 +79,7 @@ class Demo extends Component {
   }
 
   renderReduceFn() {
-    const { status, acc, item, squashBody } = this.props;
+    const { status, acc, squashBody } = this.props;
 
     const reduceBodyItemStyles = {
       display: 'inline-block',
@@ -130,7 +140,7 @@ class Demo extends Component {
         <FlipMove leaveAnimation="fade">
           {status !== 'completed' && (
             <span>
-              <Line id="reduce-body" indented>
+              <Line id="reduce-body" indented={1}>
                 {'return '}
                 <SquashChildren
                   style={{

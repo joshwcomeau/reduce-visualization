@@ -11,10 +11,18 @@ export const ReduceStatement = styled.div`
 export const Card = styled.div`
   background: #FFF;
   border-radius: 4px;
-  box-shadow: 0px 2px 3px rgba(0,0,0,0.1);
   min-height: 190px;
   margin: auto;
   padding: 2rem;
+  border-left: 1px solid rgba(0,0,0,0.1);
+  border-right: 1px solid rgba(0,0,0,0.1);
+  border-bottom: 2px solid rgba(0,0,0,0.1);
+
+  @media (max-width: 600px) {
+    margin-left: -16px;
+    margin-right: -16px;
+    padding: 1rem;
+  }
 `;
 
 export const Button = styled.button`
@@ -25,6 +33,7 @@ export const Button = styled.button`
   border-radius: 5px;
   color: #FFF;
   font-size: 18px;
+  min-width: 200px;
 
   &:disabled {
     background-color: ${GRAY_BLUE};
@@ -46,14 +55,13 @@ export const HeaderParagraph = styled.p`
 `;
 
 export const Wrapper = styled.div`
-  width: 100%;
+  width: calc(100% - 32px);
   max-width: 725px;
-  padding: 1rem;
+  padding: 16px;
   margin: 0 auto;
 `;
 
-export const Small = styled.span`
-  display: inline-block;
+export const Small = styled.div`
   text-align: center;
   padding: 1rem;
   font-size: 14px;
