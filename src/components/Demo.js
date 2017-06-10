@@ -5,6 +5,7 @@ import FlipMove from 'react-flip-move';
 import { beginAnimation } from '../actions';
 import { OPACITY_DURATION } from '../constants';
 
+import Header from './Header';
 import LilyPad from './LilyPad';
 import Frog from './Frog';
 import Line from './Line';
@@ -173,6 +174,7 @@ class Demo extends Component {
 
     return (
       <div>
+        <Header />
         <Button onClick={beginAnimation}>
             Start Animation
         </Button>

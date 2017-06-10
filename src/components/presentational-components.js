@@ -19,3 +19,16 @@ export const Card = styled.div`
 export const Button = styled.button`
   padding: 10px 25px;
 `
+
+export const Title = styled.h1`
+  font-size: 60px;
+  font-weight: bold;
+  letter-spacing: -2px;
+  color: #222;
+`
+
+export const HeaderParagraph = styled.p`
+  font-size: 22px;
+  line-height: 1.4;
+  color: #444;
+`
