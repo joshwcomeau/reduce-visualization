@@ -1,4 +1,4 @@
-import { RUN_REDUCE_LOGIC } from '../actions';
+import { RUN_REDUCE_LOGIC, RESET_ANIMATION } from '../actions';
 
 const initialState = {
   initialValue: 0,
@@ -19,6 +19,8 @@ export default function reducingDataReducer(state = initialState, action) {
         currentIndex: state.currentIndex + 1,
       };
 
+    case RESET_ANIMATION:
+      return initialState;
 
     default: return state;
   }

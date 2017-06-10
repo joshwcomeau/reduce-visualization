@@ -9,6 +9,7 @@ export const KILL_FROG = 'KILL_FROG';
 export const FOCUS_LINES = 'FOCUS_LINES';
 export const RESET_LINE_FOCUS = 'RESET_LINE_FOCUS';
 export const RUN_REDUCE_LOGIC = 'RUN_REDUCE_LOGIC';
+export const RESET_REDUCE_LOGIC = 'RESET_REDUCE_LOGIC';
 export const TOGGLE_BODY_SQUASH = 'TOGGLE_BODY_SQUASH';
 
 export const beginAnimation = () => ({
@@ -65,6 +66,10 @@ export const resetLineFocus = () => ({
 
 export const runReduceLogic = () => ({
   type: RUN_REDUCE_LOGIC,
+});
+
+export const resetReduceLogic = () => ({
+  type: RESET_REDUCE_LOGIC,
 });
 
 export const toggleBodySquash = () => ({

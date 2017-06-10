@@ -20,11 +20,9 @@ import {
   IDLE_TIME_BETWEEN_STEPS,
 } from '../constants';
 
-
 const OPACITY_TIME_WITH_IDLE = OPACITY_DURATION + IDLE_TIME_BETWEEN_STEPS;
 const TRANSLATE_TIME_WITH_IDLE = TRANSLATE_DURATION + IDLE_TIME_BETWEEN_STEPS;
 
-// function* getInitial
 
 function* runAnimation(action) {
   // For now, we're doing to be fairly dumb about this, and enumerate every

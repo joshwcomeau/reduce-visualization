@@ -61,9 +61,6 @@ class SquashChildren extends PureComponent {
     const isGrowing = children.length === 1 && nextChildren.length > 1;
     if (isGrowing) {
       this.setState({ children: nextChildren });
-      window.requestAnimationFrame(() => {
-        console.log('CHILDREFS', this.childrenRefs);
-      })
     }
   }
 
@@ -143,8 +140,6 @@ class SquashChildren extends PureComponent {
     const delegated = omit(this.props, Object.keys(SquashChildren.propTypes));
 
     const children = this.getTruthyChildArray(this.state.children);
-
-    console.log('Render squashChildren', children.length, children)
 
     return (
       <span {...delegated}>

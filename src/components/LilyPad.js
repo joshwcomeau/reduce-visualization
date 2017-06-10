@@ -1,4 +1,4 @@
-import React, { Children, PureComponent } from 'react';
+import React, { Children, Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import omit from 'lodash/omit';
@@ -11,7 +11,7 @@ import { frogsListSelector } from '../reducers/frogs.reducer';
 import Frog from './Frog';
 
 
-class LilyPad extends PureComponent {
+class LilyPad extends Component {
   static propTypes = {
     id: PropTypes.string.isRequired,
     tag: PropTypes.oneOfType([
@@ -38,6 +38,7 @@ class LilyPad extends PureComponent {
   }
 
   componentDidMount() {
+    console.log('LILLY MOUNT')
     // On mount, let Redux know that this pad exists.
     this.props.addLilyPad({ id: this.props.id, elem: this.elem });
 
@@ -118,7 +119,7 @@ class LilyPad extends PureComponent {
 const mapStateToProps = (state, ownProps) => ({
   // Find all the frogs located on this LilyPad
   frogs: frogsListSelector(state).filter(frog => (
-    frog.padId === ownProps.id
+    frog.padId === ownProps.id && !frog.dead
   )),
 })
 const mapDispatchToProps = { addLilyPad, addFrog };

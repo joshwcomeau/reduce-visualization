@@ -3,6 +3,7 @@ import createSagaMiddleware from 'redux-saga';
 
 import reducer from '../reducers';
 import runDemoSaga from '../sagas/run-demo.saga';
+import resetAnimationSaga from '../sagas/reset-animation.saga';
 import DevTools from '../components/DevTools';
 
 
@@ -19,6 +20,7 @@ export default function configureStore() {
   );
 
   sagaMiddleware.run(runDemoSaga);
+  sagaMiddleware.run(resetAnimationSaga);
 
   // Allow direct access to the store, for debugging/testing
   window.store = store;

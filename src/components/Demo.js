@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import FlipMove from 'react-flip-move';
 
-import { beginAnimation } from '../actions';
+import { beginAnimation, resetAnimation } from '../actions';
 import { OPACITY_DURATION } from '../constants';
 
 import LilyPad from './LilyPad';
@@ -169,12 +169,14 @@ class Demo extends Component {
   }
 
   render() {
-    const { beginAnimation } = this.props;
+    const { status, beginAnimation, resetAnimation } = this.props;
+
+    const hasNotYetStarted = status === 'idle';
 
     return (
       <div>
-        <Button onClick={beginAnimation}>
-            Start Animation
+        <Button onClick={hasNotYetStarted ? beginAnimation : resetAnimation}>
+            {hasNotYetStarted ? 'Begin Animation' : 'Reset Animation'}
         </Button>
 
         <Card>
@@ -200,6 +202,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   beginAnimation,
+  resetAnimation,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Demo);

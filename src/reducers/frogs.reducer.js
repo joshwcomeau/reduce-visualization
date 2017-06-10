@@ -2,7 +2,13 @@
 import { createSelector } from 'reselect';
 import omit from 'lodash/omit';
 
-import { ADD_FROG, UPDATE_FROG, KILL_FROG, JUMP_TO_NEW_PAD } from '../actions';
+import {
+  ADD_FROG,
+  UPDATE_FROG,
+  KILL_FROG,
+  JUMP_TO_NEW_PAD,
+  RESET_ANIMATION,
+} from '../actions';
 
 const initialState = {};
 
@@ -22,8 +28,6 @@ export default function frogsReducer(state = initialState, action) {
 
     case JUMP_TO_NEW_PAD: {
       const frog = state[action.frogId];
-
-      console.log('Jump', action.frogId)
 
       return {
         ...state,
@@ -48,7 +52,19 @@ export default function frogsReducer(state = initialState, action) {
     }
 
     case KILL_FROG: {
-      return omit(state, action.id);
+      const frog = state[action.id];
+
+      return {
+        ...state,
+        [action.id]: {
+          ...frog,
+          dead: true,
+        }
+      }
+    }
+
+    case RESET_ANIMATION: {
+      return initialState;
     }
 
     default: return state;
