@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import FlipMove from 'react-flip-move';
 
-import { beginAnimation } from '../actions';
 import { OPACITY_DURATION } from '../constants';
 
 import Header from './Header';
@@ -15,6 +14,8 @@ import {
   Button,
   Card,
   ReduceStatement,
+  Small,
+  Wrapper,
 } from './presentational-components';
 
 
@@ -170,14 +171,11 @@ class Demo extends Component {
   }
 
   render() {
-    const { beginAnimation } = this.props;
+    const { status } = this.props;
 
     return (
-      <div>
+      <Wrapper>
         <Header />
-        <Button onClick={beginAnimation}>
-            Start Animation
-        </Button>
 
         <Card>
           <ReduceStatement>
@@ -186,7 +184,13 @@ class Demo extends Component {
             {this.renderReduceFn()}
           </ReduceStatement>
         </Card>
-      </div>
+
+        <FadeOnChange>
+          {status === 'completed' && (
+            <Small>To re-run the animation, refresh the page.</Small>
+          )}
+        </FadeOnChange>
+      </Wrapper>
     )
   }
 }
@@ -200,8 +204,4 @@ const mapStateToProps = state => ({
   squashBody: state.animation.squashBody,
 });
 
-const mapDispatchToProps = {
-  beginAnimation,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Demo);
+export default connect(mapStateToProps)(Demo);

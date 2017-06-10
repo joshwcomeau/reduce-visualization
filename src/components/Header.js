@@ -1,18 +1,38 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-import { Title, HeaderParagraph } from './presentational-components';
+import { beginAnimation } from '../actions';
+import { Button, HeaderParagraph, Title } from './presentational-components';
 
-const Header = () => (
-  <header>
+const Header = ({ beginAnimation, hasStarted, hasFinished }) => (
+  <header style={{ marginBottom: 40 }}>
     <Title>Reduce Demo</Title>
     <HeaderParagraph>
-      Reduce is an incredibly powerful tool in the functional programmer's toolkit, but getting a handle on how it works can be challenging.
+      Reduce is an incredibly powerful tool for transforming data, but getting a handle on how it works can be challenging.
     </HeaderParagraph>
 
     <HeaderParagraph>
       This visualization aims to explain how data flows through each iteration in reduce, by following the variables. Hope it helps!
     </HeaderParagraph>
+
+    <Button onClick={beginAnimation} disabled={hasStarted}>
+        {hasFinished
+          ? 'Completed.'
+          : hasStarted
+            ? 'Running...'
+            : 'Start Animation'
+        }
+    </Button>
   </header>
 );
 
-export default Header;
+const mapStateToProps = state => ({
+  hasStarted: state.animation.status !== 'idle',
+  hasFinished: state.animation.status === 'completed',
+});
+
+const mapDispatchToProps = {
+  beginAnimation,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
