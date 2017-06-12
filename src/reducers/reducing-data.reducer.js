@@ -1,10 +1,12 @@
 import { RUN_REDUCE_LOGIC } from '../actions';
 
+const values = [3, 5, 1, 4, 2]
+
 const initialState = {
   initialValue: 0,
-  values: [1, 2, 3, 4, 5],
+  values,
   acc: 0,
-  item: 1,
+  item: values[0],
   currentIndex: 0,
 };
 
